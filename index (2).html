@@ -1,0 +1,617 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,interactive-widget=resizes-content">
+<title>अदिति · अथर्ववेद सहायिका</title>
+<meta name="description" content="अदिति — अथर्ववेद के सूक्तों का अर्थ, महत्त्व और वीडियो-स्क्रिप्ट, आवाज़ में।">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#131314" media="(prefers-color-scheme: dark)">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="अदिति">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;500;600&family=Tiro+Devanagari+Sanskrit&family=Noto+Sans+Kannada:wght@400;600&family=Noto+Sans+Telugu:wght@400;600&display=swap">
+<style>
+:root{
+  --bg:#ffffff;--surface:#f0f4f9;--surface2:#e9eef6;--ink:#1f1f1f;--mut:#5f6368;--rule:#e3e6ea;--user:#e9eef6;
+  --acc:#4F46E5;--grad:linear-gradient(90deg,#F59E0B,#EC4899 50%,#6366F1);--danger:#d93025;--blue:#3B82F6;
+  --body:"Mukta","Noto Sans Devanagari","Noto Sans Kannada","Noto Sans Telugu",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mantra:"Tiro Devanagari Sanskrit","Noto Serif Devanagari",serif;
+  --shadow:0 1px 3px rgba(0,0,0,.08),0 8px 24px rgba(0,0,0,.08);
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#131314;--surface:#1e1f20;--surface2:#282a2c;--ink:#e3e3e3;--mut:#9aa0a6;--rule:#2f3133;--user:#2f3133;--acc:#a5b4fc;
+  --shadow:0 1px 3px rgba(0,0,0,.5),0 8px 24px rgba(0,0,0,.5);color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#131314;--surface:#1e1f20;--surface2:#282a2c;--ink:#e3e3e3;--mut:#9aa0a6;--rule:#2f3133;--user:#2f3133;--acc:#a5b4fc;--shadow:0 1px 3px rgba(0,0,0,.5),0 8px 24px rgba(0,0,0,.5);color-scheme:dark}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+[hidden]{display:none!important}
+html,body{height:100%;margin:0}
+body{background:var(--bg);color:var(--ink);font:400 16px/1.65 var(--body);overflow:hidden}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;padding:0}
+:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.app{height:100dvh;display:flex;flex-direction:column;padding:env(safe-area-inset-top) env(safe-area-inset-right) 0 env(safe-area-inset-left)}
+.ib{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;color:var(--mut);flex:none}
+.ib:hover{background:var(--surface)}
+.ib svg{width:22px;height:22px}
+
+/* top bar */
+.top{flex:none;display:flex;align-items:center;gap:4px;padding:8px 10px}
+.brand{flex:1;display:flex;align-items:center;gap:8px;font-size:1.25rem;font-weight:500;min-width:0}
+.brand img{width:26px;height:26px}
+
+/* chat area */
+.main{flex:1;overflow-y:auto;overscroll-behavior:contain}
+.col{max-width:760px;margin:0 auto;padding:8px 16px 24px}
+.hello{min-height:62dvh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:6px}
+.hello img{width:64px;height:64px;animation:float 5s ease-in-out infinite}
+@keyframes float{50%{transform:translateY(-6px) rotate(3deg)}}
+.hello h2{margin:6px 0 0;font-size:clamp(1.7rem,6vw,2.4rem);font-weight:500;line-height:1.25}
+.hello h2 span{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hello p{margin:0;color:var(--mut)}
+.today{margin-top:22px;width:min(100%,460px);text-align:left;background:var(--surface);border-radius:18px;padding:14px 16px}
+.today small{color:var(--mut);font-size:.8rem}
+.today b{display:block;font-weight:500;font-size:1.05rem}
+.today .m{font:400 .98rem/1.6 var(--mantra);color:var(--mut);margin:6px 0 10px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.pills{display:flex;flex-wrap:wrap;gap:6px}
+.pill{border:1px solid var(--rule);border-radius:999px;padding:5px 12px;font-size:.85rem;background:var(--bg)}
+.pill:hover{background:var(--surface2)}
+
+.msg{margin:18px 0;display:flex;gap:12px}
+.msg.u{justify-content:flex-end}
+.msg.u .bub{background:var(--user);border-radius:20px 4px 20px 20px;padding:10px 16px;max-width:85%;white-space:pre-wrap;overflow-wrap:anywhere}
+.msg.a .av{width:30px;height:30px;flex:none;margin-top:2px}
+.msg.a .body{flex:1;min-width:0;white-space:pre-wrap;overflow-wrap:anywhere}
+.msg.a .body.err{color:var(--danger)}
+.meta{display:block;color:var(--mut);font-size:.8rem;margin-bottom:4px}
+.ref{display:block;color:var(--mut);font-size:.78rem;margin-top:6px}
+.acts{display:flex;flex-wrap:wrap;gap:4px;margin-top:8px}
+.acts button{display:inline-flex;align-items:center;gap:5px;border-radius:999px;padding:5px 11px;font-size:.84rem;color:var(--mut);border:1px solid var(--rule)}
+.acts button:hover{background:var(--surface);color:var(--ink)}
+.script{background:var(--surface);border-radius:16px;padding:14px 16px}
+.dots span{display:inline-block;width:7px;height:7px;margin-right:4px;border-radius:50%;background:var(--grad);animation:b 1.2s infinite}
+.dots span:nth-child(2){animation-delay:.15s}.dots span:nth-child(3){animation-delay:.3s}
+@keyframes b{50%{transform:translateY(-5px);opacity:.5}}
+
+/* input */
+.foot{flex:none;padding:6px 12px calc(10px + env(safe-area-inset-bottom))}
+.st{max-width:760px;margin:0 auto 6px;padding:0 10px;font-size:.82rem;color:var(--mut);min-height:0;display:none;align-items:center;gap:8px}
+.st.on{display:flex}
+.st i{width:8px;height:8px;border-radius:50%;background:var(--grad)}
+.box{max-width:760px;margin:0 auto;display:flex;align-items:flex-end;gap:4px;background:var(--surface);border-radius:28px;padding:6px 6px 6px 18px}
+.box textarea{flex:1;min-width:0;border:0;outline:0;background:transparent;color:var(--ink);font:inherit;font-size:1rem;resize:none;padding:9px 0;max-height:140px;line-height:1.5}
+.box textarea::placeholder{color:var(--mut)}
+#mic.rec{background:var(--danger);color:#fff;animation:p 1.2s infinite}
+@keyframes p{50%{box-shadow:0 0 0 7px rgba(217,48,37,.18)}}
+#mic.think{opacity:.45}
+#snd{background:var(--blue);color:#fff}
+#snd:disabled{background:transparent;color:var(--mut);opacity:.5;cursor:default}
+#stp{display:none;background:var(--surface2);color:var(--ink)}
+.ear{width:8px;height:8px;border-radius:50%;background:#22c55e;align-self:center;margin-right:2px;display:none}
+.ear.on{display:block}
+.hint{max-width:760px;margin:6px auto 0;text-align:center;font-size:.72rem;color:var(--mut)}
+
+/* drawer + sheets */
+.scrim{position:fixed;inset:0;background:rgba(0,0,0,.35);opacity:0;pointer-events:none;transition:opacity .2s;z-index:40}
+.scrim.on{opacity:1;pointer-events:auto}
+.drawer{position:fixed;top:0;bottom:0;left:0;width:min(320px,86vw);background:var(--bg);z-index:50;transform:translateX(-102%);transition:transform .25s;display:flex;flex-direction:column;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom) env(safe-area-inset-left);box-shadow:var(--shadow)}
+.drawer.on{transform:none}
+.drawer header{display:flex;align-items:center;gap:6px;padding:10px 12px}
+.drawer h3{margin:0;font-weight:500;flex:1}
+.newbtn{margin:4px 12px 10px;display:flex;align-items:center;gap:10px;background:var(--surface);border-radius:999px;padding:10px 16px;font-weight:500}
+.hlist{flex:1;overflow-y:auto;padding:0 8px 12px}
+.hgrp{font-size:.78rem;color:var(--mut);padding:10px 10px 4px}
+.hitem{display:flex;align-items:center;border-radius:999px}
+.hitem:hover,.hitem.cur{background:var(--surface)}
+.hitem button.t{flex:1;text-align:left;padding:8px 12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:.92rem}
+.hitem button.x{width:32px;height:32px;border-radius:50%;color:var(--mut);opacity:.6}
+.hitem button.x:hover{opacity:1;background:var(--surface2)}
+.hempty{color:var(--mut);font-size:.9rem;padding:12px}
+
+.sheet{position:fixed;left:0;right:0;bottom:0;margin:0 auto;max-width:640px;max-height:88dvh;background:var(--bg);border-radius:24px 24px 0 0;z-index:60;transform:translateY(105%);transition:transform .28s cubic-bezier(.2,.8,.2,1);display:flex;flex-direction:column;box-shadow:var(--shadow);padding-bottom:env(safe-area-inset-bottom)}
+.sheet.on{transform:none}
+@media (min-width:760px){.sheet{bottom:auto;top:50%;border-radius:24px;transform:translateY(-40%) scale(.97);opacity:0;pointer-events:none;transition:.2s}.sheet.on{transform:translateY(-50%);opacity:1;pointer-events:auto}}
+.sheet header{display:flex;align-items:center;gap:6px;padding:12px 12px 6px 20px}
+.sheet h3{margin:0;flex:1;font-weight:500;font-size:1.15rem}
+.sbody{overflow-y:auto;padding:4px 20px 20px}
+.f{margin:12px 0}
+.f > label,.f > span{display:block;font-size:.82rem;color:var(--mut);margin-bottom:6px}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.seg button{border:1px solid var(--rule);border-radius:999px;padding:6px 14px;font-size:.9rem}
+.seg button[aria-pressed=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.in{width:100%;font:inherit;color:var(--ink);background:var(--surface);border:0;border-radius:12px;padding:10px 14px}
+select.in{appearance:none;background-image:linear-gradient(45deg,transparent 50%,var(--mut) 50%),linear-gradient(135deg,var(--mut) 50%,transparent 50%);background-position:calc(100% - 18px) 55%,calc(100% - 13px) 55%;background-size:5px 5px;background-repeat:no-repeat}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.chk{display:flex;flex-wrap:wrap;gap:6px}
+.chk label{display:flex;align-items:center;gap:6px;border:1px solid var(--rule);border-radius:999px;padding:5px 12px;font-size:.88rem;cursor:pointer}
+.chk input{accent-color:var(--acc);margin:0}
+.sec{font-weight:500;margin:18px 0 0;font-size:1rem}
+.note{font-size:.8rem;color:var(--mut)}
+
+/* list + reader */
+.ktabs{display:flex;gap:6px;overflow-x:auto;padding:4px 0 10px;scrollbar-width:none}
+.ktabs::-webkit-scrollbar{display:none}
+.ktabs button{flex:none;border:1px solid var(--rule);border-radius:999px;padding:4px 12px;font-size:.88rem}
+.ktabs button[aria-pressed=true]{background:var(--ink);color:var(--bg)}
+.slist button{display:flex;gap:10px;width:100%;text-align:left;padding:10px 6px;border-bottom:1px solid var(--rule)}
+.slist button:hover{background:var(--surface)}
+.slist .n{flex:none;width:46px;color:var(--mut);font-size:.85rem;padding-top:2px;font-variant-numeric:tabular-nums}
+.slist .tt{display:block;font-weight:500}
+.slist .sb{display:block;font-size:.8rem;color:var(--mut)}
+.rmeta{color:var(--mut);font-size:.88rem;margin:0 0 10px}
+.rtext{white-space:pre-wrap;font-size:1.02rem;line-height:1.85}
+.rtext.big{font-size:1.2rem}
+.rtext .mn{font-family:var(--mantra)}
+details.alt{margin-top:16px;background:var(--surface);border-radius:12px;padding:10px 14px}
+details.alt summary{cursor:pointer;color:var(--mut)}
+.toast{position:fixed;left:50%;bottom:110px;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:8px 16px;border-radius:999px;font-size:.88rem;z-index:80;opacity:0;transition:opacity .2s;pointer-events:none}
+.toast.on{opacity:1}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="top">
+    <button class="ib" id="menu" data-ta="history" aria-label="बातचीत का इतिहास" title="इतिहास"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg></button>
+    <div class="brand"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiNGNTlFMEIiLz48c3RvcCBvZmZzZXQ9Ii41IiBzdG9wLWNvbG9yPSIjRUM0ODk5Ii8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjNjM2NkYxIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PGcgZmlsbD0idXJsKCNnKSI+PHBhdGggZD0iTTUwIDE0YzkgMTEgOSAyNyAwIDQwLTktMTMtOS0yOSAwLTQweiIvPjxwYXRoIGQ9Ik01MCA1OGMtNS0xMy0xOC0yMy0zMS0yMyAyIDE0IDE1IDIzIDMxIDIzeiIgb3BhY2l0eT0iLjkiLz48cGF0aCBkPSJNNTAgNThjNS0xMyAxOC0yMyAzMS0yMy0yIDE0LTE1IDIzLTMxIDIzeiIgb3BhY2l0eT0iLjkiLz48cGF0aCBkPSJNNTAgNjBjLTEwLTYtMjYtNi0zNiAyIDExIDcgMjUgNiAzNi0yeiIgb3BhY2l0eT0iLjciLz48cGF0aCBkPSJNNTAgNjBjMTAtNiAyNi02IDM2IDItMTEgNy0yNSA2LTM2LTJ6IiBvcGFjaXR5PSIuNyIvPjxyZWN0IHg9IjI2IiB5PSI3MiIgd2lkdGg9IjQ4IiBoZWlnaHQ9IjQiIHJ4PSIyIi8+PC9nPjwvc3ZnPg==" alt=""><span data-t="brand">अदिति</span></div>
+    <button class="ib" id="listb" data-ta="listT" aria-label="सूक्त-सूची" title="काण्ड-सूक्त सूची"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M4 4h7v16H4a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1zm9 0h7a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1h-7zM5 7v2h4V7zm10 0v2h4V7zm-10 4v2h4v-2zm10 0v2h4v-2z"/></svg></button>
+    <button class="ib" id="setb" data-ta="settings" aria-label="सेटिंग" title="सेटिंग"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M19.4 13a7.6 7.6 0 0 0 0-2l2.1-1.6-2-3.5-2.5 1a7.4 7.4 0 0 0-1.7-1L15 3h-4l-.4 2.9a7.4 7.4 0 0 0-1.7 1l-2.5-1-2 3.5L6.6 11a7.6 7.6 0 0 0 0 2l-2.1 1.6 2 3.5 2.5-1a7.4 7.4 0 0 0 1.7 1L11 21h4l.4-2.9a7.4 7.4 0 0 0 1.7-1l2.5 1 2-3.5zM13 15.5A3.5 3.5 0 1 1 13 8.5a3.5 3.5 0 0 1 0 7z" transform="translate(-1 0)"/></svg></button>
+    <button class="ib" id="newb" data-ta="newchat" aria-label="नई बातचीत" title="नई बातचीत"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M5 19h1.4l9.3-9.3-1.4-1.4L5 17.6zm14.7-10.6-4.1-4.1 1.3-1.3a1.4 1.4 0 0 1 2 0l2.1 2.1a1.4 1.4 0 0 1 0 2zM3 21v-4.2L14.3 5.5l4.2 4.2L7.2 21z"/></svg></button>
+  </header>
+
+  <main class="main" id="main"><div class="col" id="col">
+    <section class="hello" id="hello">
+      <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiNGNTlFMEIiLz48c3RvcCBvZmZzZXQ9Ii41IiBzdG9wLWNvbG9yPSIjRUM0ODk5Ii8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjNjM2NkYxIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PGcgZmlsbD0idXJsKCNnKSI+PHBhdGggZD0iTTUwIDE0YzkgMTEgOSAyNyAwIDQwLTktMTMtOS0yOSAwLTQweiIvPjxwYXRoIGQ9Ik01MCA1OGMtNS0xMy0xOC0yMy0zMS0yMyAyIDE0IDE1IDIzIDMxIDIzeiIgb3BhY2l0eT0iLjkiLz48cGF0aCBkPSJNNTAgNThjNS0xMyAxOC0yMyAzMS0yMy0yIDE0LTE1IDIzLTMxIDIzeiIgb3BhY2l0eT0iLjkiLz48cGF0aCBkPSJNNTAgNjBjLTEwLTYtMjYtNi0zNiAyIDExIDcgMjUgNiAzNi0yeiIgb3BhY2l0eT0iLjciLz48cGF0aCBkPSJNNTAgNjBjMTAtNiAyNi02IDM2IDItMTEgNy0yNSA2LTM2LTJ6IiBvcGFjaXR5PSIuNyIvPjxyZWN0IHg9IjI2IiB5PSI3MiIgd2lkdGg9IjQ4IiBoZWlnaHQ9IjQiIHJ4PSIyIi8+PC9nPjwvc3ZnPg==" alt="">
+      <h2><span id="hi1">नमस्ते!</span></h2>
+      <p id="hi2">अथर्ववेद के किसी भी सूक्त के बारे में पूछिए, या स्क्रिप्ट माँगिए।</p>
+      <div class="today" id="today" hidden>
+        <small id="tdl">आज का सूक्त</small>
+        <b id="tdt"></b>
+        <div class="m" id="tdm"></div>
+        <div class="pills"><button class="pill" id="tda">अर्थ बताइए</button><button class="pill" id="tdr" data-t="readP">📖 पढ़िए</button><button class="pill" id="tds" data-t="mk">🎬 स्क्रिप्ट</button></div>
+      </div>
+    </section>
+    <div id="msgs" aria-live="polite"></div>
+  </div></main>
+
+  <footer class="foot">
+    <div class="st" id="st"><i></i><span id="stt"></span></div>
+    <div class="box">
+      <textarea id="qi" rows="1" placeholder="अदिति से पूछिए"></textarea>
+      <span class="ear" id="ear" data-ta="earT" title="“Hey Aditi” सुन रही है"></span>
+      <button class="ib" id="stp" data-ta="stop" aria-label="रोकें" title="रोकें"><svg viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2" fill="currentColor"/></svg></button>
+      <button class="ib" id="mic" data-ta="speakB" aria-label="बोलिए" title="बोलिए"></button>
+      <button class="ib" id="snd" data-ta="send" aria-label="भेजें" title="भेजें" disabled><svg viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="M12 19V5M5.5 11.5 12 5l6.5 6.5"/></svg></button>
+    </div>
+    <div class="hint" id="hint">“Hey Aditi” बोलकर भी पूछ सकते हैं</div>
+  </footer>
+</div>
+
+<div class="scrim" id="scrim"></div>
+
+<aside class="drawer" id="drawer" data-tl="history" aria-label="इतिहास">
+  <header><h3 data-t="chats">बातचीत</h3><button class="ib" data-close data-ta="close" aria-label="बंद करें"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M6.4 5 5 6.4 10.6 12 5 17.6 6.4 19l5.6-5.6 5.6 5.6 1.4-1.4-5.6-5.6L19 6.4 17.6 5 12 10.6z"/></svg></button></header>
+  <button class="newbtn" id="newb2"><svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M11 5h2v6h6v2h-6v6h-2v-6H5v-2h6z"/></svg><span data-t="newchat">नई बातचीत</span></button>
+  <div class="hlist" id="hlist"></div>
+</aside>
+
+<section class="sheet" id="sset" role="dialog" data-tl="settings" aria-label="सेटिंग">
+  <header><h3 data-t="settings">सेटिंग</h3><button class="ib" data-close data-ta="close" aria-label="बंद करें"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M6.4 5 5 6.4 10.6 12 5 17.6 6.4 19l5.6-5.6 5.6 5.6 1.4-1.4-5.6-5.6L19 6.4 17.6 5 12 10.6z"/></svg></button></header>
+  <div class="sbody">
+    <div class="f"><label for="uname" data-t="nameL">आपका नाम (अभिवादन में)</label><input class="in" id="uname" data-tp="nameP" placeholder="जैसे: Vagveda"></div>
+    <div class="f"><span data-t="langL">भाषा</span><div class="seg" id="langs"></div></div>
+    <div class="f"><span data-t="paceL">बोलने की गति</span><div class="seg" id="paces"></div></div>
+    <div class="f"><span data-t="themeL">रूप</span><div class="seg" id="themes"></div></div>
+    <div class="f"><span data-t="fontL">पढ़ने के अक्षर</span><div class="seg" id="fonts"></div></div>
+    <p class="sec" data-t="scriptSec">🎬 स्क्रिप्ट</p>
+    <div class="g2">
+      <div class="f"><label for="slang" data-t="langL">भाषा</label><select class="in" id="slang"><option value="" data-t="sameLang">बातचीत वाली भाषा</option><option>हिंदी</option><option>Hinglish</option><option>English</option><option>संस्कृत + हिंदी</option><option>ಕನ್ನಡ (Kannada)</option><option>తెలుగు (Telugu)</option><option>मराठी</option></select></div>
+      <div class="f"><label for="dur" data-t="durL">अवधि</label><select class="in" id="dur"><option value="0.5" data-t="d05">30 सेकंड</option><option value="1" selected data-t="d1">1 मिनट</option><option value="2" data-t="d2">2 मिनट</option><option value="3" data-t="d3">3 मिनट</option><option value="5" data-t="d5">5 मिनट</option></select></div>
+      <div class="f"><label for="tone" data-t="toneL">भाव</label><select class="in" id="tone"><option value="शांत और आध्यात्मिक" data-t="t1">शांत और आध्यात्मिक</option><option value="प्रेरणादायक" data-t="t2">प्रेरणादायक</option><option value="गंभीर और ज्ञानवर्धक" data-t="t3">गंभीर और ज्ञानवर्धक</option><option value="भक्तिमय" data-t="t4">भक्तिमय</option><option value="सरल और रोचक" data-t="t5">सरल और रोचक</option></select></div>
+      <div class="f"><label for="style" data-t="styleL">शैली</label><select class="in" id="style"><option>Voiceover Narration</option><option>Storytelling</option><option>Q&amp;A / Explainer</option><option>Reel Hook-style</option></select></div>
+      <div class="f"><label for="ep">Episode</label><input class="in" id="ep" data-tp="epP" placeholder="जैसे: 12"></div>
+      <div class="f"><label for="brand">Channel</label><input class="in" id="brand" value="@vagvedavedic"></div>
+    </div>
+    <div class="f"><span data-t="withL">साथ में</span><div class="chk" id="opts">
+      <label><input type="checkbox" value="मंत्र (मूल पाठ)" checked><span data-t="oM">मंत्र</span></label>
+      <label><input type="checkbox" value="सरल अर्थ" checked><span data-t="oA">अर्थ</span></label>
+      <label><input type="checkbox" value="Reel के लिए 15-15 सेकंड के हिस्से, हर हिस्से के साथ स्क्रीन पर दिखने वाला छोटा text"><span data-t="oR">Reel हिस्से</span></label>
+      <label><input type="checkbox" value="Visual / Scene suggestions"><span data-t="oV">दृश्य</span></label>
+      <label><input type="checkbox" value="Title, Description और Hashtags" checked>Title + Tags</label>
+      <label><input type="checkbox" value="Thumbnail text ideas">Thumbnail</label>
+    </div></div>
+    <p class="sec" data-t="appSec">📱 फ़ोन पर ऐप</p>
+    <p class="note" id="pwanote" data-t="appNote">Android (Chrome): ऊपर ⋮ → “Add to Home screen / Install app”। iPhone (Safari): नीचे शेयर बटन ⎋ → “Add to Home Screen”।</p>
+    <button class="pill" id="installb" hidden data-t="install">📲 ऐप की तरह install करें</button>
+    <p class="sec" data-t="histSec">🗂️ इतिहास</p>
+    <p class="note" data-t="histNote">बातचीत इसी फ़ोन/कंप्यूटर के browser में सेव होती है।</p>
+    <button class="pill" id="clearh" data-t="clear">सारा इतिहास मिटाएँ</button>
+  </div>
+</section>
+
+<section class="sheet" id="slist" role="dialog" data-tl="listT" aria-label="सूक्त-सूची">
+  <header><h3 data-t="listT">काण्ड-सूक्त सूची</h3><button class="ib" data-close data-ta="close" aria-label="बंद करें"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M6.4 5 5 6.4 10.6 12 5 17.6 6.4 19l5.6-5.6 5.6 5.6 1.4-1.4-5.6-5.6L19 6.4 17.6 5 12 10.6z"/></svg></button></header>
+  <div class="sbody">
+    <input class="in" id="lq" data-tp="lqP" placeholder="नाम, ऋषि या देवता से खोजिए…" autocomplete="off">
+    <div class="ktabs" id="ktabs"></div>
+    <div class="slist" id="sl"></div>
+  </div>
+</section>
+
+<section class="sheet" id="sread" role="dialog" data-tl="sukta" aria-label="सूक्त">
+  <header><h3 id="rt">सूक्त</h3><button class="ib" data-close data-ta="close" aria-label="बंद करें"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M6.4 5 5 6.4 10.6 12 5 17.6 6.4 19l5.6-5.6 5.6 5.6 1.4-1.4-5.6-5.6L19 6.4 17.6 5 12 10.6z"/></svg></button></header>
+  <div class="sbody">
+    <p class="rmeta" id="rm"></p>
+    <div class="acts" id="ra"></div>
+    <div class="rtext" id="rx"></div>
+    <details class="alt" id="ry"><summary data-t="alt">दूसरे अनुवाद में अर्थ</summary><div class="rtext" id="ryx"></div></details>
+  </div>
+</section>
+<div class="toast" id="toast"></div>
+<script>
+const $=id=>document.getElementById(id);
+const API="/api/aditi";
+const LOGO=document.querySelector(".brand img").src;
+const msgsEl=$("msgs"),mic=$("mic"),qi=$("qi");
+const ICON_MIC='<svg viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M8 10v4"/><path d="M12 6v12"/><path d="M16 9.5v5"/></g></svg>',
+      ICON_STOP='<svg viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2" fill="currentColor"/></svg>';
+const store={get(k,d){try{const v=localStorage.getItem(k);return v==null?d:JSON.parse(v)}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+
+/* ---------------- भाषाएँ ---------------- */
+const LANGS={
+ hi:{l:"हिंदी",s:"हिंदी",hello:"नमस्ते",sub:"अथर्ववेद के किसी भी सूक्त के बारे में पूछिए, या स्क्रिप्ट माँगिए।",ph:"अदिति से पूछिए",hint:"“Hey Aditi” बोलकर भी पूछ सकते हैं",rec:"सुन रही हूँ… बोलिए (रुकते ही भेजूँगी)",think:"सोच रही हूँ…",speak:"बोल रही हूँ… (⏹ या “रुको”)",script:"स्क्रिप्ट लिख रही हूँ…",voice:"आवाज़ बना रही हूँ…",today:"आज का सूक्त",ask:"अर्थ बताइए",askq:n=>n+" का अर्थ और महत्त्व बताइए",again:"🔊 फिर सुनिए",mantra:"🕉️ मंत्र सुनिए",read:"📖 पूरा पाठ",mk:"🎬 स्क्रिप्ट",copy:"⧉ Copy",save:"⬇️ .txt",vo:"🎧 Voiceover",ready:"स्क्रिप्ट तैयार है।",noaud:"आवाज़ सुनाई नहीं दी, फिर बोलिए।"},
+ kn:{l:"ಕನ್ನಡ",s:"ಕನ್ನಡ (Kannada)",hello:"ನಮಸ್ಕಾರ",sub:"ಅಥರ್ವವೇದದ ಯಾವುದೇ ಸೂಕ್ತದ ಬಗ್ಗೆ ಕೇಳಿ, ಅಥವಾ ಸ್ಕ್ರಿಪ್ಟ್ ಕೇಳಿ.",ph:"ಅದಿತಿಯನ್ನು ಕೇಳಿ",hint:"“Hey Aditi” ಎಂದು ಹೇಳಿಯೂ ಕೇಳಬಹುದು",rec:"ಕೇಳುತ್ತಿದ್ದೇನೆ… ಮಾತನಾಡಿ",think:"ಯೋಚಿಸುತ್ತಿದ್ದೇನೆ…",speak:"ಹೇಳುತ್ತಿದ್ದೇನೆ… (⏹)",script:"ಸ್ಕ್ರಿಪ್ಟ್ ಬರೆಯುತ್ತಿದ್ದೇನೆ…",voice:"ಧ್ವನಿ ತಯಾರಿಸುತ್ತಿದ್ದೇನೆ…",today:"ಇಂದಿನ ಸೂಕ್ತ",ask:"ಅರ್ಥ ಹೇಳಿ",askq:n=>n+" ಅರ್ಥ ಮತ್ತು ಮಹತ್ವ ಹೇಳಿ",again:"🔊 ಮತ್ತೆ ಕೇಳಿ",mantra:"🕉️ ಮಂತ್ರ ಕೇಳಿ",read:"📖 ಪೂರ್ಣ ಪಾಠ",mk:"🎬 ಸ್ಕ್ರಿಪ್ಟ್",copy:"⧉ Copy",save:"⬇️ .txt",vo:"🎧 Voiceover",ready:"ಸ್ಕ್ರಿಪ್ಟ್ ಸಿದ್ಧ.",noaud:"ಧ್ವನಿ ಕೇಳಿಸಲಿಲ್ಲ, ಮತ್ತೆ ಮಾತನಾಡಿ."},
+ en:{l:"English",s:"English",hello:"Namaste",sub:"Ask about any Atharvaveda sukta, or ask for a video script.",ph:"Ask Aditi",hint:"You can also say “Hey Aditi”",rec:"Listening… speak",think:"Thinking…",speak:"Speaking… (⏹ or say “stop”)",script:"Writing the script…",voice:"Making the voiceover…",today:"Sukta of the day",ask:"Explain",askq:n=>"Meaning and significance of "+n,again:"🔊 Listen again",mantra:"🕉️ Hear mantra",read:"📖 Full text",mk:"🎬 Script",copy:"⧉ Copy",save:"⬇️ .txt",vo:"🎧 Voiceover",ready:"Your script is ready.",noaud:"I didn't hear you, please speak again."},
+ te:{l:"తెలుగు",s:"తెలుగు (Telugu)",hello:"నమస్తే",sub:"అథర్వవేదంలోని ఏ సూక్తం గురించైనా అడగండి, లేదా స్క్రిప్ట్ కోరండి.",ph:"అదితిని అడగండి",hint:"“Hey Aditi” అని కూడా అడగవచ్చు",rec:"వింటున్నాను… మాట్లాడండి",think:"ఆలోచిస్తున్నాను…",speak:"చెబుతున్నాను… (⏹)",script:"స్క్రిప్ట్ రాస్తున్నాను…",voice:"వాయిస్ తయారు చేస్తున్నాను…",today:"నేటి సూక్తం",ask:"అర్థం చెప్పండి",askq:n=>n+" అర్థం, ప్రాముఖ్యత చెప్పండి",again:"🔊 మళ్ళీ వినండి",mantra:"🕉️ మంత్రం వినండి",read:"📖 పూర్తి పాఠం",mk:"🎬 స్క్రిప్ట్",copy:"⧉ Copy",save:"⬇️ .txt",vo:"🎧 Voiceover",ready:"స్క్రిప్ట్ సిద్ధం.",noaud:"వినిపించలేదు, మళ్ళీ మాట్లాడండి."},
+ mr:{l:"मराठी",s:"मराठी",hello:"नमस्कार",sub:"अथर्ववेदातील कोणत्याही सूक्ताबद्दल विचारा, किंवा स्क्रिप्ट मागा.",ph:"अदितीला विचारा",hint:"“Hey Aditi” म्हणूनही विचारू शकता",rec:"ऐकते आहे… बोला",think:"विचार करते आहे…",speak:"बोलते आहे… (⏹)",script:"स्क्रिप्ट लिहिते आहे…",voice:"आवाज तयार करते आहे…",today:"आजचे सूक्त",ask:"अर्थ सांगा",askq:n=>n+" चा अर्थ आणि महत्त्व सांगा",again:"🔊 पुन्हा ऐका",mantra:"🕉️ मंत्र ऐका",read:"📖 पूर्ण पाठ",mk:"🎬 स्क्रिप्ट",copy:"⧉ Copy",save:"⬇️ .txt",vo:"🎧 Voiceover",ready:"स्क्रिप्ट तयार आहे.",noaud:"आवाज ऐकू आला नाही, पुन्हा बोला."}};
+let lang=store.get("aditi-lang","hi");if(!LANGS[lang])lang="hi";
+const T=k=>LANGS[lang][k];
+/* ---------------- पेज के सारे शब्द, पाँचों भाषाओं में ---------------- */
+const UI={
+ hi:{brand:"अदिति",history:"इतिहास",listT:"काण्ड-सूक्त सूची",settings:"सेटिंग",newchat:"नई बातचीत",readP:"📖 पढ़िए",earT:"“Hey Aditi” सुन रही है",stop:"रोकें",speakB:"बोलिए",send:"भेजें",chats:"बातचीत",close:"बंद करें",nameL:"आपका नाम (अभिवादन में)",nameP:"जैसे: Vagveda",langL:"भाषा",paceL:"बोलने की गति",themeL:"रूप",fontL:"पढ़ने के अक्षर",scriptSec:"🎬 स्क्रिप्ट",sameLang:"बातचीत वाली भाषा",durL:"अवधि",d05:"30 सेकंड",d1:"1 मिनट",d2:"2 मिनट",d3:"3 मिनट",d5:"5 मिनट",toneL:"भाव",t1:"शांत और आध्यात्मिक",t2:"प्रेरणादायक",t3:"गंभीर और ज्ञानवर्धक",t4:"भक्तिमय",t5:"सरल और रोचक",styleL:"शैली",epP:"जैसे: 12",withL:"साथ में",oM:"मंत्र",oA:"अर्थ",oR:"Reel हिस्से",oV:"दृश्य",appSec:"📱 फ़ोन पर ऐप",appNote:"Android (Chrome): ऊपर ⋮ → “Add to Home screen / Install app”। iPhone (Safari): नीचे शेयर बटन → “Add to Home Screen”।",install:"📲 ऐप की तरह install करें",histSec:"🗂️ इतिहास",histNote:"बातचीत इसी फ़ोन/कंप्यूटर के browser में सेव होती है।",clear:"सारा इतिहास मिटाएँ",lqP:"नाम, ऋषि या देवता से खोजिए…",alt:"दूसरे अनुवाद में अर्थ",
+  slow:"धीमी",normal:"सामान्य",fast:"तेज़",auto:"अपने आप",light:"दिन",dark:"रात",big:"बड़े",noChats:"अभी कोई बातचीत नहीं है।",del:"मिटाएँ",today_:"आज",yday:"कल",week:"इस हफ़्ते",loading:"लोड हो रहा है…",nothing:"कुछ नहीं मिला।",notFound:"सूक्त नहीं मिला।",kanda:"काण्ड",sukta:"सूक्त",rishi:"ऋषि",devata:"देवता",chhanda:"छन्द",basis:"आधार: अथर्ववेद",words:"शब्द",sec30:"30 सेकंड",min:"मिनट",copied:"Copy हो गया",copyFail:"Copy नहीं हुआ — text चुनकर copy करें",voDone:"🎧 Voiceover download हो गया",voNone:"Voiceover text नहीं मिला",voFail:"आवाज़ नहीं बनी",mantraNo:"मंत्र नहीं मिला",micPerm:"Mic की अनुमति दीजिए (browser settings → Microphone → Allow)",clearQ:"सारी बातचीत मिटा दें?",empty:"जवाब खाली आया। दोबारा कोशिश करें।",nosrv:"सर्वर (Netlify function) नहीं मिला। यह पेज अकेले नहीं चलता — पूरा फ़ोल्डर Netlify पर deploy करके उसी लिंक से खोलिए।",locale:"hi-IN"},
+ en:{brand:"Aditi",history:"History",listT:"Kanda–Sukta list",settings:"Settings",newchat:"New chat",readP:"📖 Read",earT:"Listening for “Hey Aditi”",stop:"Stop",speakB:"Speak",send:"Send",chats:"Chats",close:"Close",nameL:"Your name (for the greeting)",nameP:"e.g. Vagveda",langL:"Language",paceL:"Speaking speed",themeL:"Appearance",fontL:"Reading text size",scriptSec:"🎬 Script",sameLang:"Same as chat language",durL:"Duration",d05:"30 seconds",d1:"1 minute",d2:"2 minutes",d3:"3 minutes",d5:"5 minutes",toneL:"Mood",t1:"Calm and spiritual",t2:"Inspiring",t3:"Serious and informative",t4:"Devotional",t5:"Simple and engaging",styleL:"Style",epP:"e.g. 12",withL:"Include",oM:"Mantra",oA:"Meaning",oR:"Reel parts",oV:"Visuals",appSec:"📱 Phone app",appNote:"Android (Chrome): ⋮ menu → “Add to Home screen / Install app”. iPhone (Safari): Share button → “Add to Home Screen”.",install:"📲 Install as app",histSec:"🗂️ History",histNote:"Chats are saved in this phone/computer's browser.",clear:"Delete all history",lqP:"Search by name, rishi or devata…",alt:"Meaning in the other translation",
+  slow:"Slow",normal:"Normal",fast:"Fast",auto:"Automatic",light:"Light",dark:"Dark",big:"Large",noChats:"No chats yet.",del:"Delete",today_:"Today",yday:"Yesterday",week:"This week",loading:"Loading…",nothing:"Nothing found.",notFound:"Sukta not found.",kanda:"Kanda",sukta:"Sukta",rishi:"Rishi",devata:"Devata",chhanda:"Chhanda",basis:"Source: Atharvaveda",words:"words",sec30:"30 seconds",min:"min",copied:"Copied",copyFail:"Couldn't copy — select the text and copy",voDone:"🎧 Voiceover downloaded",voNone:"No voiceover text found",voFail:"Couldn't make the audio",mantraNo:"Mantra not found",micPerm:"Please allow the microphone (browser settings → Microphone → Allow)",clearQ:"Delete all chats?",empty:"Empty reply. Please try again.",nosrv:"Server (Netlify function) not found. This page can't run on its own — deploy the full folder on Netlify and open it from that link.",locale:"en-IN"},
+ kn:{brand:"ಅದಿತಿ",history:"ಇತಿಹಾಸ",listT:"ಕಾಂಡ–ಸೂಕ್ತ ಪಟ್ಟಿ",settings:"ಸೆಟ್ಟಿಂಗ್ಸ್",newchat:"ಹೊಸ ಸಂಭಾಷಣೆ",readP:"📖 ಓದಿ",earT:"“Hey Aditi” ಕೇಳುತ್ತಿದೆ",stop:"ನಿಲ್ಲಿಸಿ",speakB:"ಮಾತನಾಡಿ",send:"ಕಳುಹಿಸಿ",chats:"ಸಂಭಾಷಣೆಗಳು",close:"ಮುಚ್ಚಿ",nameL:"ನಿಮ್ಮ ಹೆಸರು (ಸ್ವಾಗತಕ್ಕೆ)",nameP:"ಉದಾ: Vagveda",langL:"ಭಾಷೆ",paceL:"ಮಾತಿನ ವೇಗ",themeL:"ರೂಪ",fontL:"ಓದುವ ಅಕ್ಷರ ಗಾತ್ರ",scriptSec:"🎬 ಸ್ಕ್ರಿಪ್ಟ್",sameLang:"ಸಂಭಾಷಣೆಯ ಭಾಷೆ",durL:"ಅವಧಿ",d05:"30 ಸೆಕೆಂಡ್",d1:"1 ನಿಮಿಷ",d2:"2 ನಿಮಿಷ",d3:"3 ನಿಮಿಷ",d5:"5 ನಿಮಿಷ",toneL:"ಭಾವ",t1:"ಶಾಂತ ಮತ್ತು ಆಧ್ಯಾತ್ಮಿಕ",t2:"ಪ್ರೇರಣಾದಾಯಕ",t3:"ಗಂಭೀರ ಮತ್ತು ಜ್ಞಾನವರ್ಧಕ",t4:"ಭಕ್ತಿಮಯ",t5:"ಸರಳ ಮತ್ತು ಆಸಕ್ತಿದಾಯಕ",styleL:"ಶೈಲಿ",epP:"ಉದಾ: 12",withL:"ಜೊತೆಗೆ",oM:"ಮಂತ್ರ",oA:"ಅರ್ಥ",oR:"Reel ಭಾಗಗಳು",oV:"ದೃಶ್ಯ",appSec:"📱 ಫೋನ್ ಆ್ಯಪ್",appNote:"Android (Chrome): ⋮ → “Add to Home screen / Install app”. iPhone (Safari): ಶೇರ್ ಬಟನ್ → “Add to Home Screen”.",install:"📲 ಆ್ಯಪ್ ಆಗಿ ಇನ್‌ಸ್ಟಾಲ್ ಮಾಡಿ",histSec:"🗂️ ಇತಿಹಾಸ",histNote:"ಸಂಭಾಷಣೆಗಳು ಈ ಫೋನ್/ಕಂಪ್ಯೂಟರ್‌ನ browser ನಲ್ಲಿ ಉಳಿಯುತ್ತವೆ.",clear:"ಎಲ್ಲಾ ಇತಿಹಾಸ ಅಳಿಸಿ",lqP:"ಹೆಸರು, ಋಷಿ ಅಥವಾ ದೇವತೆಯಿಂದ ಹುಡುಕಿ…",alt:"ಇನ್ನೊಂದು ಅನುವಾದದ ಅರ್ಥ",
+  slow:"ನಿಧಾನ",normal:"ಸಾಮಾನ್ಯ",fast:"ವೇಗ",auto:"ಸ್ವಯಂ",light:"ಹಗಲು",dark:"ರಾತ್ರಿ",big:"ದೊಡ್ಡ",noChats:"ಇನ್ನೂ ಸಂಭಾಷಣೆ ಇಲ್ಲ.",del:"ಅಳಿಸಿ",today_:"ಇಂದು",yday:"ನಿನ್ನೆ",week:"ಈ ವಾರ",loading:"ಲೋಡ್ ಆಗುತ್ತಿದೆ…",nothing:"ಏನೂ ಸಿಗಲಿಲ್ಲ.",notFound:"ಸೂಕ್ತ ಸಿಗಲಿಲ್ಲ.",kanda:"ಕಾಂಡ",sukta:"ಸೂಕ್ತ",rishi:"ಋಷಿ",devata:"ದೇವತೆ",chhanda:"ಛಂದಸ್ಸು",basis:"ಆಧಾರ: ಅಥರ್ವವೇದ",words:"ಪದಗಳು",sec30:"30 ಸೆಕೆಂಡ್",min:"ನಿಮಿಷ",copied:"Copy ಆಯಿತು",copyFail:"Copy ಆಗಲಿಲ್ಲ",voDone:"🎧 Voiceover download ಆಯಿತು",voNone:"Voiceover ಪಠ್ಯ ಸಿಗಲಿಲ್ಲ",voFail:"ಧ್ವನಿ ತಯಾರಾಗಲಿಲ್ಲ",mantraNo:"ಮಂತ್ರ ಸಿಗಲಿಲ್ಲ",micPerm:"ಮೈಕ್ ಅನುಮತಿ ನೀಡಿ (browser settings → Microphone → Allow)",clearQ:"ಎಲ್ಲಾ ಸಂಭಾಷಣೆ ಅಳಿಸಬೇಕೆ?",empty:"ಉತ್ತರ ಖಾಲಿ. ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ.",nosrv:"ಸರ್ವರ್ (Netlify function) ಸಿಗಲಿಲ್ಲ. ಪೂರ್ಣ ಫೋಲ್ಡರ್ ಅನ್ನು Netlify ನಲ್ಲಿ deploy ಮಾಡಿ ಅದೇ ಲಿಂಕ್‌ನಿಂದ ತೆರೆಯಿರಿ.",locale:"kn-IN"},
+ te:{brand:"అదితి",history:"చరిత్ర",listT:"కాండ–సూక్త జాబితా",settings:"సెట్టింగ్స్",newchat:"కొత్త సంభాషణ",readP:"📖 చదవండి",earT:"“Hey Aditi” వింటోంది",stop:"ఆపండి",speakB:"మాట్లాడండి",send:"పంపండి",chats:"సంభాషణలు",close:"మూసివేయండి",nameL:"మీ పేరు (స్వాగతం కోసం)",nameP:"ఉదా: Vagveda",langL:"భాష",paceL:"మాట్లాడే వేగం",themeL:"రూపం",fontL:"చదివే అక్షరాల పరిమాణం",scriptSec:"🎬 స్క్రిప్ట్",sameLang:"సంభాషణ భాష",durL:"వ్యవధి",d05:"30 సెకన్లు",d1:"1 నిమిషం",d2:"2 నిమిషాలు",d3:"3 నిమిషాలు",d5:"5 నిమిషాలు",toneL:"భావం",t1:"ప్రశాంతం, ఆధ్యాత్మికం",t2:"ప్రేరణాత్మకం",t3:"గంభీరం, జ్ఞానవర్ధకం",t4:"భక్తిమయం",t5:"సరళం, ఆసక్తికరం",styleL:"శైలి",epP:"ఉదా: 12",withL:"దానితో పాటు",oM:"మంత్రం",oA:"అర్థం",oR:"Reel భాగాలు",oV:"దృశ్యాలు",appSec:"📱 ఫోన్ యాప్",appNote:"Android (Chrome): ⋮ → “Add to Home screen / Install app”. iPhone (Safari): షేర్ బటన్ → “Add to Home Screen”.",install:"📲 యాప్‌గా ఇన్‌స్టాల్ చేయండి",histSec:"🗂️ చరిత్ర",histNote:"సంభాషణలు ఈ ఫోన్/కంప్యూటర్ browser లో సేవ్ అవుతాయి.",clear:"మొత్తం చరిత్ర తొలగించండి",lqP:"పేరు, ఋషి లేదా దేవతతో వెతకండి…",alt:"మరో అనువాదంలో అర్థం",
+  slow:"నెమ్మది",normal:"సాధారణ",fast:"వేగం",auto:"స్వయంచాలకం",light:"పగలు",dark:"రాత్రి",big:"పెద్దవి",noChats:"ఇంకా సంభాషణలు లేవు.",del:"తొలగించు",today_:"ఈరోజు",yday:"నిన్న",week:"ఈ వారం",loading:"లోడ్ అవుతోంది…",nothing:"ఏమీ దొరకలేదు.",notFound:"సూక్తం దొరకలేదు.",kanda:"కాండ",sukta:"సూక్తం",rishi:"ఋషి",devata:"దేవత",chhanda:"ఛందస్సు",basis:"ఆధారం: అథర్వవేదం",words:"పదాలు",sec30:"30 సెకన్లు",min:"నిమిషం",copied:"Copy అయింది",copyFail:"Copy కాలేదు",voDone:"🎧 Voiceover download అయింది",voNone:"Voiceover పాఠం దొరకలేదు",voFail:"ఆడియో తయారవలేదు",mantraNo:"మంత్రం దొరకలేదు",micPerm:"మైక్ అనుమతి ఇవ్వండి (browser settings → Microphone → Allow)",clearQ:"అన్ని సంభాషణలు తొలగించాలా?",empty:"ఖాళీ జవాబు. మళ్ళీ ప్రయత్నించండి.",nosrv:"సర్వర్ (Netlify function) దొరకలేదు. పూర్తి ఫోల్డర్‌ను Netlify లో deploy చేసి అదే లింక్‌తో తెరవండి.",locale:"te-IN"},
+ mr:{brand:"अदिती",history:"इतिहास",listT:"कांड–सूक्त सूची",settings:"सेटिंग",newchat:"नवी चर्चा",readP:"📖 वाचा",earT:"“Hey Aditi” ऐकते आहे",stop:"थांबवा",speakB:"बोला",send:"पाठवा",chats:"चर्चा",close:"बंद करा",nameL:"तुमचे नाव (अभिवादनासाठी)",nameP:"उदा: Vagveda",langL:"भाषा",paceL:"बोलण्याचा वेग",themeL:"रूप",fontL:"वाचनाच्या अक्षरांचा आकार",scriptSec:"🎬 स्क्रिप्ट",sameLang:"चर्चेची भाषा",durL:"कालावधी",d05:"30 सेकंद",d1:"1 मिनिट",d2:"2 मिनिटे",d3:"3 मिनिटे",d5:"5 मिनिटे",toneL:"भाव",t1:"शांत आणि आध्यात्मिक",t2:"प्रेरणादायी",t3:"गंभीर आणि ज्ञानवर्धक",t4:"भक्तिमय",t5:"सोपे आणि रोचक",styleL:"शैली",epP:"उदा: 12",withL:"सोबत",oM:"मंत्र",oA:"अर्थ",oR:"Reel भाग",oV:"दृश्य",appSec:"📱 फोनवर ॲप",appNote:"Android (Chrome): ⋮ → “Add to Home screen / Install app”. iPhone (Safari): शेअर बटण → “Add to Home Screen”.",install:"📲 ॲप म्हणून install करा",histSec:"🗂️ इतिहास",histNote:"चर्चा याच फोन/कॉम्प्युटरच्या browser मध्ये सेव्ह होते.",clear:"सर्व इतिहास पुसा",lqP:"नाव, ऋषी किंवा देवतेने शोधा…",alt:"दुसऱ्या अनुवादातील अर्थ",
+  slow:"हळू",normal:"सामान्य",fast:"जलद",auto:"आपोआप",light:"दिवस",dark:"रात्र",big:"मोठी",noChats:"अजून कोणतीही चर्चा नाही.",del:"पुसा",today_:"आज",yday:"काल",week:"या आठवड्यात",loading:"लोड होत आहे…",nothing:"काहीही सापडले नाही.",notFound:"सूक्त सापडले नाही.",kanda:"कांड",sukta:"सूक्त",rishi:"ऋषी",devata:"देवता",chhanda:"छंद",basis:"आधार: अथर्ववेद",words:"शब्द",sec30:"30 सेकंद",min:"मिनिट",copied:"Copy झाले",copyFail:"Copy झाले नाही",voDone:"🎧 Voiceover download झाले",voNone:"Voiceover मजकूर सापडला नाही",voFail:"आवाज तयार झाला नाही",mantraNo:"मंत्र सापडला नाही",micPerm:"माइकची परवानगी द्या (browser settings → Microphone → Allow)",clearQ:"सर्व चर्चा पुसायच्या?",empty:"उत्तर रिकामे आले. पुन्हा प्रयत्न करा.",nosrv:"सर्व्हर (Netlify function) सापडला नाही. पूर्ण फोल्डर Netlify वर deploy करून त्याच लिंकवरून उघडा.",locale:"mr-IN"}};
+const U=k=>(UI[lang]&&UI[lang][k])||UI.hi[k]||k;
+// स्क्रिप्ट माँगने वाला वाक्य (स्क्रीन पर भी दिखता है) — "12.1" संख्या से server सही सूक्त पकड़ता है
+const sreq=(k,s,t)=>({hi:`अथर्ववेद ${k}.${s}${t?" ("+t+")":""} की वीडियो स्क्रिप्ट`,en:`Video script on Atharvaveda ${k}.${s}${t?" ("+t+")":""}`,kn:`ಅಥರ್ವವೇದ ${k}.${s}${t?" ("+t+")":""} ವಿಡಿಯೋ ಸ್ಕ್ರಿಪ್ಟ್`,te:`అథర్వవేదం ${k}.${s}${t?" ("+t+")":""} వీడియో స్క్రిప్ట్`,mr:`अथर्ववेद ${k}.${s}${t?" ("+t+")":""} ची व्हिडिओ स्क्रिप्ट`})[lang];
+function applyUI(){
+  document.querySelectorAll("[data-t]").forEach(e=>{e.textContent=U(e.dataset.t)});
+  document.querySelectorAll("[data-tp]").forEach(e=>{e.placeholder=U(e.dataset.tp)});
+  document.querySelectorAll("[data-ta]").forEach(e=>{const t=U(e.dataset.ta);e.setAttribute("aria-label",t);e.title=t});
+  document.querySelectorAll("[data-tl]").forEach(e=>e.setAttribute("aria-label",U(e.dataset.tl)));
+  document.title=U("brand")+" · "+({hi:"अथर्ववेद सहायिका",en:"Atharvaveda assistant",kn:"ಅಥರ್ವವೇದ ಸಹಾಯಕಿ",te:"అథర్వవేద సహాయకి",mr:"अथर्ववेद सहायिका"}[lang]);
+}
+
+let pace=store.get("aditi-pace",0.95),fontBig=store.get("aditi-font",false);
+
+/* ---------------- स्थिति ---------------- */
+let state="idle",stopRec=null,unlocked=false,speakingText="";
+const player=new Audio();player.setAttribute("playsinline","");
+function setState(s,m){state=s;
+  if(s==="idle"||s==="speak")setTimeout(wakeStart,600);else wakeStop();
+  mic.className="ib"+(s==="rec"?" rec":s==="think"?" think":"");mic.innerHTML=s==="rec"?ICON_STOP:ICON_MIC;
+  $("stp").style.display=s==="speak"?"grid":"none";
+  const msg=m||(s==="idle"?"":T(s)||"");$("stt").textContent=msg;$("st").classList.toggle("on",!!msg);
+  $("ear").classList.toggle("on",s==="idle"&&wakeOn)}
+function toast(t){const e=$("toast");e.textContent=t;e.classList.add("on");clearTimeout(e._t);e._t=setTimeout(()=>e.classList.remove("on"),1800)}
+
+/* ---------------- इतिहास (इसी browser में) ---------------- */
+let chats=store.get("aditi-chats",[]),cur=null;   // cur = {id,title,ts,items:[...]}
+const saveChats=()=>{chats=chats.slice(0,60);store.set("aditi-chats",chats)};
+function newChat(){cur=null;msgsEl.textContent="";$("hello").hidden=false;renderHist();closeAll()}
+function ensureChat(first){if(!cur){cur={id:Date.now().toString(36),title:first.slice(0,60),ts:Date.now(),items:[]};chats.unshift(cur)}cur.ts=Date.now();
+  const i=chats.indexOf(cur);if(i>0){chats.splice(i,1);chats.unshift(cur)}}
+function record_(item){cur.items.push(item);if(cur.items.length>120)cur.items.splice(0,cur.items.length-120);saveChats();renderHist()}
+function apiHist(){return(cur?cur.items:[]).filter(i=>i.r==="u"||i.r==="a").slice(-8).map(i=>({role:i.r==="u"?"user":"assistant",content:i.t.slice(0,1500)}))}
+function dayLabel(ts){const d=new Date(ts),n=new Date();const a=new Date(n.getFullYear(),n.getMonth(),n.getDate())-new Date(d.getFullYear(),d.getMonth(),d.getDate());const days=Math.round(a/864e5);
+  return days===0?U("today_"):days===1?U("yday"):days<7?U("week"):d.toLocaleDateString(U("locale"),{day:"numeric",month:"long",year:"numeric"})}
+function renderHist(){const h=$("hlist");h.textContent="";
+  if(!chats.length){h.innerHTML='';h.appendChild(el("div","hempty",U("noChats")));return}
+  let last="";for(const c of chats){const g=dayLabel(c.ts);if(g!==last){const e=document.createElement("div");e.className="hgrp";e.textContent=g;h.appendChild(e);last=g}
+    const it=document.createElement("div");it.className="hitem"+(cur&&cur.id===c.id?" cur":"");
+    const t=document.createElement("button");t.className="t";t.textContent=c.title;t.title=new Date(c.ts).toLocaleString(U("locale"));t.onclick=()=>openChat(c.id);
+    const x=document.createElement("button");x.className="x";x.textContent="✕";x.setAttribute("aria-label",U("del"));x.onclick=()=>{chats=chats.filter(z=>z!==c);if(cur===c)newChat();saveChats();renderHist()};
+    it.append(t,x);h.appendChild(it)}}
+function openChat(id){const c=chats.find(z=>z.id===id);if(!c)return;stopAll();cur=c;msgsEl.textContent="";$("hello").hidden=true;
+  for(const it of c.items)renderItem(it,false);renderHist();closeAll();scrollEnd()}
+
+/* ---------------- संदेश दिखाना ---------------- */
+const scrollEnd=()=>{const m=$("main");m.scrollTop=m.scrollHeight};
+function el(tag,cls,txt){const e=document.createElement(tag);if(cls)e.className=cls;if(txt!=null)e.textContent=txt;return e}
+function uMsg(t){const w=el("div","msg u");w.appendChild(el("div","bub",t));msgsEl.appendChild(w);scrollEnd();return w}
+function aMsg(){const w=el("div","msg a");const av=el("img","av");av.src=LOGO;av.alt="";const b=el("div","body");w.append(av,b);msgsEl.appendChild(w);scrollEnd();return b}
+function act(body,label,fn){let a=body.querySelector(":scope > .acts");if(!a){a=el("div","acts");body.appendChild(a)}const b=el("button",null,label);b.type="button";b.onclick=fn;a.appendChild(b);return b}
+function thinking(body){body.innerHTML='<span class="dots"><span></span><span></span><span></span></span>'}
+function copyText(t){const ok=()=>toast(U("copied"));const fb=()=>{try{const ta=el("textarea");ta.value=t;ta.style.position="fixed";ta.style.opacity="0";document.body.appendChild(ta);ta.select();const r=document.execCommand("copy");ta.remove();r?ok():toast(U("copyFail"))}catch(e){toast(U("copyFail"))}};if(navigator.clipboard&&window.isSecureContext)navigator.clipboard.writeText(t).then(ok,fb);else fb()}
+function saveTxt(t,name){const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([t],{type:"text/plain;charset=utf-8"}));a.download=name+".txt";document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},1000)}
+const fname=t=>{const m=String(t||"").match(/(\d{1,2})\s*[.]\s*(\d{1,3})/);const d=new Date();return m?m[1]+"."+m[2]:d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate()+"-"+d.getHours()+d.getMinutes()};
+
+function renderItem(it,live){
+  if(it.r==="u"){uMsg(it.t);return}
+  const b=aMsg();
+  if(it.r==="a"){b.textContent=it.t;if(it.err)b.classList.add("err");answerActs(b,it)}
+  if(it.r==="s"){b.textContent="";const box=el("div","script");const meta=el("span","meta",it.meta||"");const tx=el("div",null,it.t);box.append(meta,tx);b.appendChild(box);scriptActs(b,it)}
+}
+function answerActs(b,it){
+  if(it.err)return;
+  if(it.refs&&it.refs.length){b.appendChild(el("span","ref",U("basis")+" "+it.refs.join(", ")))}
+  act(b,T("again"),()=>idle()&&speak(it.t));
+  if(it.sk){const [k,s]=it.sk;
+    act(b,T("mantra"),()=>idle()&&speakMantra(k,s));
+    act(b,T("read"),()=>openReader(k,s));
+    act(b,T("mk"),()=>idle()&&makeScript(sreq(k,s,it.title)))}
+  act(b,T("copy"),()=>copyText(it.t))}
+function scriptActs(b,it){
+  act(b,T("copy"),()=>copyText(it.t));
+  act(b,T("save"),()=>saveTxt(it.t,"aditi-script-"+fname(it.q)));
+  act(b,T("vo"),()=>idle()&&voiceover(it.t,"aditi-voiceover-"+fname(it.q)));
+  act(b,"🔊",()=>idle()&&speak(voText(it.t).slice(0,1800)))}
+const idle=()=>state==="idle";
+
+/* ---------------- server ---------------- */
+const nosrv=()=>U("nosrv");
+async function call(a,body){
+  const r=await fetch(API+"?a="+a,{method:"POST",...(body instanceof FormData?{body}:{headers:{"content-type":"application/json"},body:JSON.stringify(body)})}).catch(()=>{throw new Error(nosrv())});
+  if(r.status===404&&a!=="mantra"||r.status===405)throw new Error(nosrv());
+  const j=await r.json().catch(()=>({error:nosrv()+" ("+r.status+")"}));if(!r.ok||j.error)throw new Error(j.error||r.status);return j}
+async function getJSON(q){const r=await fetch(API+"?"+q);if(!r.ok)throw new Error(r.status);return r.json()}
+
+/* ---------------- बोलना ---------------- */
+function unlock(){try{getAC()}catch(e){}if(unlocked)return;unlocked=true;player.src="data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAQB8AAIA+AAACABAAZGF0YQAAAAA=";player.play().catch(()=>{})}
+function playAll(audios){return new Promise(res=>{let i=0;const next=()=>{if(i>=audios.length||state!=="speak")return res();
+  player.onended=next;player.onerror=next;player.src="data:audio/wav;base64,"+audios[i++];player.play().catch(()=>res())};next()})}
+async function speak(text,opts={}){
+  setState("think",opts.mantra?T("think"):undefined);speakingText=text;
+  try{const {audios}=await call("tts",{text,lang,pace,mantra:!!opts.mantra});setState("speak");await playAll(audios)}
+  catch(e){toast("🔇 "+e.message)}
+  speakingText="";setState("idle")}
+async function speakMantra(k,s){
+  setState("think");
+  try{const j=await call("mantra",{k,s});toast("🕉️ "+(j.title||j.ref));await speak(j.text,{mantra:true})}
+  catch(e){toast(U("mantraNo"));setState("idle")}}
+function stopAll(){player.pause();if(stopRec)stopRec();if(state==="speak")setState("idle")}
+
+/* ---------------- Voiceover (WAV) ---------------- */
+function voText(t){const vo=t.split(/\n\s*(?:2|२)\s*[.)]\s/)[0];
+  return vo.replace(/^.*VOICEOVER.*$/gim,"").replace(/\[[^\]]*\]/g,"").replace(/\(?\d{1,2}:\d{2}\s*[–-]\s*\d{1,2}:\d{2}\)?/g,"").replace(/[*#_>`🎙️🎬]/gu,"").replace(/\n{2,}/g,"\n").trim()}
+function b64ToBytes(b){const s=atob(b),u=new Uint8Array(s.length);for(let i=0;i<s.length;i++)u[i]=s.charCodeAt(i);return u}
+function wavParts(u){const v=new DataView(u.buffer);let p=12,fmt=null,data=null;
+  while(p+8<=u.length){const id=String.fromCharCode(u[p],u[p+1],u[p+2],u[p+3]),sz=v.getUint32(p+4,true);
+    if(id==="fmt ")fmt=u.slice(p+8,p+8+sz);if(id==="data"){data=u.slice(p+8,Math.min(u.length,p+8+sz));break}p+=8+sz+(sz&1)}
+  return{fmt,data}}
+async function voiceover(t,name){
+  const text=voText(t);if(!text)return toast(U("voNone"));
+  setState("think",T("voice"));
+  try{
+    const parts=[];let buf="";for(const s of text.split(/(?<=[।॥.!?])\s*/)){if((buf+" "+s).length>1500&&buf){parts.push(buf);buf=s}else buf=buf?buf+" "+s:s}if(buf)parts.push(buf);
+    let fmt=null;const datas=[];
+    for(const p of parts){const {audios}=await call("tts",{text:p,lang,pace});for(const a of audios){const w=wavParts(b64ToBytes(a));if(!fmt)fmt=w.fmt;if(w.data)datas.push(w.data)}}
+    if(!fmt||!datas.length)throw new Error(U("voFail"));
+    const len=datas.reduce((n,d)=>n+d.length,0),out=new Uint8Array(12+8+fmt.length+8+len),v=new DataView(out.buffer);
+    const w=(o,s)=>{for(let i=0;i<4;i++)out[o+i]=s.charCodeAt(i)};
+    w(0,"RIFF");v.setUint32(4,out.length-8,true);w(8,"WAVE");w(12,"fmt ");v.setUint32(16,fmt.length,true);out.set(fmt,20);
+    let o=20+fmt.length;w(o,"data");v.setUint32(o+4,len,true);o+=8;for(const d of datas){out.set(d,o);o+=d.length}
+    const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([out],{type:"audio/wav"}));a.download=name+".wav";document.body.appendChild(a);a.click();
+    setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},2000);toast(U("voDone"));
+  }catch(e){toast("⚠️ "+e.message)}
+  setState("idle")}
+
+/* ---------------- स्क्रिप्ट ---------------- */
+const SCRIPT_RE=/स्क्रिप्ट|script|वीडियो|विडियो|video|रील|reel|यूट्यूब|youtube|वॉइसओवर|voice\s*over|ಸ್ಕ್ರಿಪ್ಟ್|ವಿಡಿಯೋ|స్క్రిప్ట్|వీడియో/i;
+function durFrom(text){
+  const t=text.replace(/[०-९]/g,c=>"०१२३४५६७८९".indexOf(c)).replace(/[೦-೯]/g,c=>"೦೧೨೩೪೫೬೭೮೯".indexOf(c)).replace(/[౦-౯]/g,c=>"౦౧౨౩౪౫౬౭౮౯".indexOf(c));
+  let m=t.match(/(\d+)\s*(?:सेकंड|सेकेंड|sec|second|ಸೆಕೆಂಡ್|సెకన్)/i);if(m)return Math.max(.5,Math.min(5,+m[1]/60));
+  m=t.match(/(\d+(?:\.\d+)?)\s*(?:मिनट|मिनिट|min|minute|ನಿಮಿಷ|నిమిష)/i);if(m)return Math.max(.5,Math.min(5,+m[1]));
+  return null}
+let lastSukta=null;
+async function makeScript(request){
+  if(!idle())return;
+  $("hello").hidden=true;ensureChat(request);
+  uMsg(request);record_({r:"u",t:request});
+  const mins=durFrom(request)??parseFloat($("dur").value),words=Math.round(mins*125),durTxt=mins<1?U("sec30"):mins+" "+U("min"),durHi=mins<1?"30 सेकंड":mins+" मिनट";
+  const b=aMsg();const box=el("div","script");const meta=el("span","meta","🎬 "+durTxt+" · ~"+words+" "+U("words"));const tx=el("div");thinking(tx);box.append(meta,tx);b.appendChild(box);
+  setState("think",T("script"));let txt="";
+  try{
+    const r=await fetch(API+"?a=script",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({
+      name:request,dur:mins,lang:$("slang").value||LANGS[lang].s,tone:$("tone").value,style:$("style").value,ep:$("ep").value,brand:$("brand").value,
+      extras:[...document.querySelectorAll("#opts input:checked")].map(i=>i.value)})}).catch(()=>{throw new Error(nosrv())});
+    if(r.status===404||r.status===405)throw new Error(nosrv());
+    if(!r.ok||!r.body){const j=await r.json().catch(()=>({}));throw new Error(j.error||(nosrv()+" ("+r.status+")"))}
+    const rd=r.body.getReader(),dec=new TextDecoder();let gotHead=false;
+    for(;;){const {done,value}=await rd.read();if(done)break;txt+=dec.decode(value,{stream:true});
+      if(!gotHead){const z=txt.indexOf("\u0000");if(z<0)continue;const h=txt.slice(0,z).trim();if(h)meta.textContent+=" · "+h;txt=txt.slice(z+1);gotHead=true}
+      tx.textContent=txt;scrollEnd()}
+    if(!txt.trim())throw new Error(U("empty"));
+  }catch(e){tx.textContent="⚠️ "+(e.message||e);b.classList.add("err");setState("idle");return}
+  const it={r:"s",t:txt,meta:meta.textContent,q:request};record_(it);scriptActs(b,it);
+  setState("idle");speak(T("ready"))}
+
+/* ---------------- सवाल-जवाब ---------------- */
+async function ask(text){
+  if(!idle())return;
+  if(SCRIPT_RE.test(text)){
+    const req=(/इस|इसकी|इसका|this|it\b|ಇದರ|దీని|याची/i.test(text)&&lastSukta&&!/सूक्त|sukt|ಸೂಕ್ತ|సూక్త|\d+\.\d+/i.test(text))?text+" ("+lastSukta[0]+"."+lastSukta[1]+")":text;
+    return makeScript(req)}
+  $("hello").hidden=true;ensureChat(text);
+  const hist=apiHist();uMsg(text);record_({r:"u",t:text});
+  const b=aMsg();thinking(b);setState("think");
+  let r;try{r=await call("chat",{messages:[...hist,{role:"user",content:text}],lang})}
+  catch(e){b.textContent="⚠️ "+e.message;b.classList.add("err");record_({r:"a",t:"⚠️ "+e.message,err:1});setState("idle");return}
+  const it={r:"a",t:r.reply,refs:r.refs||[],title:r.title||""};
+  if(it.refs.length){const [k,s]=it.refs[0].split(".").map(Number);it.sk=[k,s];lastSukta=[k,s]}
+  b.textContent=it.t;answerActs(b,it);record_(it);scrollEnd();
+  await speak(it.t)}
+async function listen(){
+  setState("rec");
+  const blob=await record();
+  if(!blob){if(state==="rec")setState("idle");toast(T("noaud"));return}
+  setState("think");
+  const fd=new FormData();fd.append("file",blob,"speech.wav");fd.append("lang",lang);
+  try{const {text}=await call("stt",fd);setState("idle");if(text)await ask(text);else toast(T("noaud"))}
+  catch(e){toast("⚠️ "+e.message);setState("idle")}}
+
+/* ---------------- रिकॉर्डिंग (16 kHz WAV, चुप होते ही रुकती है) ---------------- */
+let AC=null;
+function getAC(){if(!AC||AC.state==="closed")AC=new (window.AudioContext||window.webkitAudioContext)();if(AC.state==="suspended")AC.resume().catch(()=>{});return AC}
+async function record(){
+  let stream;
+  try{stream=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:true,noiseSuppression:true,autoGainControl:true}})}
+  catch(e){setState("idle");toast(U("micPerm"));return null}
+  const ctx=getAC();try{await ctx.resume()}catch(e){}
+  const src=ctx.createMediaStreamSource(stream),proc=ctx.createScriptProcessor(4096,1,1),mute=ctx.createGain();mute.gain.value=0;
+  const bufs=[];let heard=false,quiet=0,total=0,noise=0,frames=0,done=false;const rate=ctx.sampleRate,t0=Date.now();
+  return await new Promise(res=>{
+    const finish=(manual)=>{if(done)return;done=true;clearInterval(guard);
+      try{proc.disconnect();src.disconnect();mute.disconnect()}catch(e){}stream.getTracks().forEach(t=>t.stop());stopRec=null;mic.style.boxShadow="";
+      const ok=heard||(manual&&total>0.6);res(ok&&bufs.length?wav(bufs,rate):null)};
+    stopRec=()=>finish(true);
+    const guard=setInterval(()=>{const el=(Date.now()-t0)/1000;if(el>25)finish(false);else if(el>4&&frames===0)finish(false)},500);
+    proc.onaudioprocess=e=>{if(done)return;const d=e.inputBuffer.getChannelData(0);bufs.push(new Float32Array(d));frames++;
+      let s=0;for(let i=0;i<d.length;i++)s+=d[i]*d[i];const rms=Math.sqrt(s/d.length),sec=d.length/rate;total+=sec;
+      if(total<0.35){noise=Math.max(noise,rms);return}
+      const th=Math.max(0.006,noise*2.5);
+      mic.style.boxShadow="0 0 0 "+Math.min(10,Math.round(rms/th*3))+"px rgba(217,48,37,.25)";
+      if(rms>th){heard=true;quiet=0}else if(heard)quiet+=sec;
+      if((heard&&quiet>1.3)||(!heard&&total>9))finish(false)};
+    src.connect(proc);proc.connect(mute);mute.connect(ctx.destination)})}
+function wav(bufs,rate){
+  const len=bufs.reduce((n,b)=>n+b.length,0),all=new Float32Array(len);let o=0;for(const b of bufs){all.set(b,o);o+=b.length}
+  const ratio=rate/16000,n=Math.floor(len/ratio),pcm=new Int16Array(n);
+  for(let i=0;i<n;i++){const v=Math.max(-1,Math.min(1,all[Math.floor(i*ratio)]));pcm[i]=v<0?v*32768:v*32767}
+  const buf=new ArrayBuffer(44+pcm.length*2),v=new DataView(buf),w=(p,s)=>{for(let i=0;i<s.length;i++)v.setUint8(p+i,s.charCodeAt(i))};
+  w(0,"RIFF");v.setUint32(4,36+pcm.length*2,true);w(8,"WAVE");w(12,"fmt ");v.setUint32(16,16,true);v.setUint16(20,1,true);v.setUint16(22,1,true);
+  v.setUint32(24,16000,true);v.setUint32(28,32000,true);v.setUint16(32,2,true);v.setUint16(34,16,true);w(36,"data");v.setUint32(40,pcm.length*2,true);
+  new Int16Array(buf,44).set(pcm);return new Blob([buf],{type:"audio/wav"})}
+
+/* ---------------- “Hey Aditi” (हमेशा चालू) + बोलते समय “रुको” ---------------- */
+const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+const WAKE=/(?:अ|आ|ए|ऐ)\s?[दडड़][िीे]?\s?[तटथ][िीय]|अदित|आदित|adit|adeet|aditi|adithi|editi|aditya|ಅದಿತ|ಆದಿತ|అదిత|ఆదిత/i;
+const STOPW=/रुको|रुकिए|रुक जाओ|ठहरो|चुप|\bstop\b|ಸಾಕು|ನಿಲ್ಲಿಸಿ|ఆపు|ఆగండి|थांब/i;
+const WL={hi:"hi-IN",kn:"kn-IN",en:"en-IN",te:"te-IN",mr:"mr-IN"};
+let wakeOn=false,wr=null,wrOn=false,micOK=false,fails=0;
+function beep(){try{const c=getAC(),o=c.createOscillator(),g=c.createGain();o.frequency.value=880;g.gain.setValueAtTime(.12,c.currentTime);g.gain.exponentialRampToValueAtTime(.001,c.currentTime+.25);o.connect(g);g.connect(c.destination);o.start();o.stop(c.currentTime+.26)}catch(e){}}
+async function ensureMic(){if(micOK)return true;try{const s=await navigator.mediaDevices.getUserMedia({audio:true});s.getTracks().forEach(t=>t.stop());micOK=true;return true}catch(e){return false}}
+function wakeStop(){if(wr){wr.onend=null;try{wr.abort()}catch(e){}}wr=null;wrOn=false;$("ear").classList.remove("on")}
+function wakeStart(){
+  if(!SR||!wakeOn||wrOn||document.hidden||!(state==="idle"||state==="speak"))return;
+  wr=new SR();wr.lang=WL[lang]||"hi-IN";wr.continuous=true;wr.interimResults=true;wrOn=true;
+  let pend=null;
+  const fire=t=>{const m=t.match(WAKE);if(!m)return;
+    const rest=t.slice(m.index+m[0].length).replace(/^[^\s,।.!?]*/,"").replace(/^[\s,।.!?]+/,"").trim();
+    wakeStop();if(state==="speak"){player.pause();setState("idle")}
+    beep();if(rest.split(/\s+/).length>=2)ask(rest);else setTimeout(listen,250)};
+  wr.onstart=()=>{if(state==="idle")$("ear").classList.add("on")};
+  wr.onresult=e=>{fails=0;const r=e.results[e.results.length-1],t=r[0].transcript.trim();
+    if(state==="speak"){
+      if(STOPW.test(t)&&!STOPW.test(speakingText)){player.pause();setState("idle");return}
+      if(!WAKE.test(t)||WAKE.test(speakingText))return}       // अपनी ही आवाज़ से न जागे
+    clearTimeout(pend);if(!WAKE.test(t))return;
+    if(r.isFinal)return fire(t);
+    pend=setTimeout(()=>{if(wrOn)fire(t)},1200)};
+  wr.onerror=e=>{if(e.error==="service-not-allowed"||e.error==="not-allowed"&&++fails>=2){wakeOn=false;wakeStop()}};
+  wr.onend=()=>{wrOn=false;wr=null;if(wakeOn&&(state==="idle"||state==="speak"))setTimeout(wakeStart,fails?1500:300)};
+  try{wr.start()}catch(e){wrOn=false}}
+async function wakeAuto(){if(!SR||wakeOn)return;if(!(await ensureMic()))return;fails=0;wakeOn=true;wakeStart()}
+document.addEventListener("visibilitychange",()=>{if(!document.hidden)setTimeout(wakeStart,300);else wakeStop()});
+
+/* ---------------- सूची और पढ़ने का पन्ना ---------------- */
+let INDEX=null,curK=1,todayRef="";
+async function loadIndex(){if(INDEX)return INDEX;try{INDEX=await getJSON("a=index")}catch(e){INDEX=[]}return INDEX}
+function renderList(){const q=$("lq").value.trim(),sl=$("sl");sl.textContent="";
+  const rows=INDEX.filter(r=>q?(r.slice(2).join(" ").includes(q)||(r[0]+"."+r[1])===q):r[0]===curK);
+  document.querySelectorAll("#ktabs button").forEach(b=>b.setAttribute("aria-pressed",!q&&+b.dataset.k===curK));
+  if(!rows.length){sl.appendChild(el("div","hempty",U("nothing")));return}
+  for(const [k,s,t,r,d] of rows.slice(0,300)){const b=el("button");b.type="button";
+    b.append(el("span","n",k+"."+s));const w=el("span");w.append(el("span","tt",t||U("sukta")+" "+s),el("span","sb",[r&&U("rishi")+": "+r,d&&U("devata")+": "+d].filter(Boolean).join(" · ")));b.append(w);
+    b.onclick=()=>openReader(k,s);sl.appendChild(b)}}
+async function openList(){openSheet("slist");if(!INDEX){$("sl").textContent="";$("sl").appendChild(el("div","hempty",U("loading")));await loadIndex()}
+  const kt=$("ktabs");kt.textContent="";for(let k=1;k<=20;k++){const b=el("button",null,U("kanda")+" "+k);b.dataset.k=k;b.onclick=()=>{curK=k;$("lq").value="";renderList()};kt.appendChild(b)}
+  renderList()}
+async function openReader(k,s){
+  openSheet("sread");$("rt").textContent=k+"."+s;$("rm").textContent=U("loading");$("rx").textContent="";$("ra").textContent="";$("ry").hidden=true;
+  let r;try{r=await getJSON("a=sukta&k="+k+"&s="+s)}catch(e){$("rm").textContent=U("notFound");return}
+  $("rt").textContent=(r.t||U("sukta"))+" · "+k+"."+s;
+  $("rm").textContent=[U("kanda")+" "+k+", "+U("sukta")+" "+s,r.r&&U("rishi")+": "+r.r,r.d&&U("devata")+": "+r.d,r.c&&U("chhanda")+": "+r.c.slice(0,80)].filter(Boolean).join(" · ");
+  const rx=$("rx");rx.className="rtext"+(fontBig?" big":"");rx.textContent=r.x;
+  if(r.y){$("ry").hidden=false;$("ryx").textContent=r.y;$("ryx").className="rtext"+(fontBig?" big":"")}
+  const ra=$("ra"),add=(l,f)=>{const b=el("button",null,l);b.type="button";b.onclick=f;ra.appendChild(b)};
+  add(T("mantra"),()=>idle()&&speakMantra(k,s));
+  add("💬 "+T("ask"),()=>{closeAll();ask(T("askq")((r.t||"")+" ("+k+"."+s+")"))});
+  add(T("mk"),()=>{closeAll();makeScript(sreq(k,s,r.t))});
+  add(T("copy"),()=>copyText(r.x))}
+
+/* ---------------- आज का सूक्त ---------------- */
+async function today(){const idx=await loadIndex();if(!idx.length)return;
+  const good=idx.filter(r=>r[2]&&r[2].length>4),d=new Date(),n=Math.floor((d-new Date(d.getFullYear(),0,0))/864e5)+d.getFullYear()*7;
+  const [k,s,t,r,dv]=good[n%good.length];
+  todayRef=k+"."+s;$("tdl").textContent=T("today")+" · "+todayRef;$("tdt").textContent=t+(dv?" — "+dv:"");
+  getJSON("a=sukta&k="+k+"&s="+s).then(j=>{$("tdm").textContent=j.m||""}).catch(()=>{});
+  $("tda").textContent=T("ask");$("tda").onclick=()=>{unlock();ask(T("askq")(t+" ("+k+"."+s+")"))};
+  $("tdr").onclick=()=>openReader(k,s);
+  $("tds").onclick=()=>{unlock();makeScript(sreq(k,s,t))};
+  $("today").hidden=false}
+
+/* ---------------- sheets / drawer ---------------- */
+function openSheet(id){closeAll(true);$(id).classList.add("on");$("scrim").classList.add("on")}
+function closeAll(keepScrim){document.querySelectorAll(".sheet.on,.drawer.on").forEach(e=>e.classList.remove("on"));if(!keepScrim)$("scrim").classList.remove("on")}
+document.querySelectorAll("[data-close]").forEach(b=>b.onclick=()=>closeAll());
+$("scrim").onclick=()=>closeAll();
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeAll()});
+$("menu").onclick=()=>{renderHist();closeAll(true);$("drawer").classList.add("on");$("scrim").classList.add("on")};
+$("setb").onclick=()=>openSheet("sset");
+$("listb").onclick=openList;
+$("lq").oninput=renderList;
+$("newb").onclick=newChat;$("newb2").onclick=newChat;
+$("clearh").onclick=()=>{if(confirm(U("clearQ"))){chats=[];saveChats();newChat()}};
+
+/* ---------------- सेटिंग ---------------- */
+function seg(id,items,curv,onpick){const w=$(id);w.textContent="";for(const [v,l] of items){const b=el("button",null,l);b.type="button";b.setAttribute("aria-pressed",v===curv);b.onclick=()=>{w.querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed",x===b));onpick(v)};w.appendChild(b)}}
+function applyLang(){qi.placeholder=T("ph");$("hint").textContent=SR?T("hint"):"";const nm=store.get("aditi-name","");
+  $("hi1").textContent=T("hello")+(nm?", "+nm:"")+"!";$("hi2").textContent=T("sub");$("tdl").textContent=T("today")+(todayRef?" · "+todayRef:"");$("tda").textContent=T("ask");
+  applyUI();renderHist();if(INDEX&&$("slist").classList.contains("on"))openList();
+  seg("paces",[[0.8,U("slow")],[0.95,U("normal")],[1.15,U("fast")]],pace,v=>{pace=v;store.set("aditi-pace",v)});
+  seg("themes",[["auto",U("auto")],["light",U("light")],["dark",U("dark")]],store.get("aditi-theme","auto"),setTheme);
+  seg("fonts",[[false,U("normal")],[true,U("big")]],fontBig,v=>{fontBig=v;store.set("aditi-font",v)});
+  document.documentElement.lang=lang}
+seg("langs",Object.entries(LANGS).map(([k,v])=>[k,v.l]),lang,v=>{lang=v;store.set("aditi-lang",v);applyLang();if(wakeOn){wakeStop();setTimeout(wakeStart,300)}});
+const theme=store.get("aditi-theme","auto");if(theme!=="auto")document.documentElement.dataset.theme=theme;
+function setTheme(v){store.set("aditi-theme",v);if(v==="auto")delete document.documentElement.dataset.theme;else document.documentElement.dataset.theme=v}
+$("uname").value=store.get("aditi-name","");$("uname").oninput=()=>{store.set("aditi-name",$("uname").value.trim());applyLang()};
+
+/* ---------------- इनपुट ---------------- */
+mic.innerHTML=ICON_MIC;
+mic.onclick=()=>{unlock();if(state==="rec"&&stopRec)return stopRec();if(state==="speak"){player.pause();setState("idle");return}if(idle())listen()};
+$("stp").onclick=()=>{player.pause();setState("idle")};
+const send=()=>{unlock();const v=qi.value.trim();if(v&&idle()){qi.value="";fit();ask(v)}};
+$("snd").onclick=send;
+qi.addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.shiftKey&&!e.isComposing){e.preventDefault();send()}});
+function fit(){qi.style.height="auto";qi.style.height=Math.min(140,qi.scrollHeight)+"px";$("snd").disabled=!qi.value.trim()}
+qi.addEventListener("input",fit);
+
+/* ---------------- PWA ---------------- */
+let deferred=null;
+window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();deferred=e;$("installb").hidden=false});
+$("installb").onclick=async()=>{if(!deferred)return;deferred.prompt();await deferred.userChoice;deferred=null;$("installb").hidden=true};
+if("serviceWorker" in navigator&&location.protocol==="https:")navigator.serviceWorker.register("sw.js").catch(()=>{});
+
+/* ---------------- शुरू ---------------- */
+applyLang();setState("idle");renderHist();today();
+wakeAuto();
+["pointerdown","keydown"].forEach(ev=>document.addEventListener(ev,()=>{unlock();if(!wakeOn)wakeAuto()},true));
+
+</script>
+</body>
+</html>
